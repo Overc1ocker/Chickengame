@@ -2,9 +2,11 @@ extends KinematicBody2D
 
 var motion = Vector2(0, 200)
 var desired
+var movable = false #if you die you cant move
+var hp = 0
 
 func _ready():
-	attack()
+	attack() 
 
 func attack():
 	if $Damage.is_colliding():
@@ -14,20 +16,20 @@ func attack():
 	yield(get_tree().create_timer(0.01), "timeout")
 	attack()
 
-func _physics_process(_delta):
+func _physics_process(_delta): #the a
 	
 	desired = find_node_by_name(get_tree().get_root(), "Player").position
 	
-	if desired.x + 25 < position.x and motion.x > -100:
+	if desired.x + 25 < position.x and motion.x > -100 and movable == true:
 		motion.x -= 10
-	elif desired.x - 25 > position.x and motion.x < 100:
+	elif desired.x - 25 > position.x and motion.x < 100 and movable == true:
 		motion.x += 10
 	elif motion.x > 0:
 		motion.x -= 10
 	elif motion.x < 0:
 		motion.x += 10
 	
-	if desired.y < position.y and is_on_wall():
+	if desired.y < position.y and is_on_wall() and movable == true:
 		motion.y = -300
 	elif motion.y < 300:
 		motion.y += 12
@@ -38,6 +40,9 @@ func _physics_process(_delta):
 		position.y = -500
 	
 	move_and_slide(motion)
+	
+	if hp < 1:
+		movable == false
 
 func find_node_by_name(root, name):
 	if(root.get_name() == name): return root
