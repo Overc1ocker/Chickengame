@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://World.gd" type="Script" id=2]
+[ext_resource path="res://En2.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 399.959, 9.14388 )
+
+[node name="World" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, 1.59143 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2( 0, 28.4465 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource( 1 )
+
+[node name="Mimic" parent="." instance=ExtResource( 3 )]
+position = Vector2( 226.607, -199.948 )
