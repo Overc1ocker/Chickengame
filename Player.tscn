@@ -142,3 +142,12 @@ collision_layer = 2
 [node name="DamgedCol" type="CollisionShape2D" parent="Damged"]
 position = Vector2( 0, -16 )
 shape = SubResource( 24 )
+
+[node name="Damage" type="RayCast2D" parent="."]
+position = Vector2( 0, -10 )
+enabled = true
+cast_to = Vector2( 50, 0 )
+collision_mask = 4
+
+[node name="Controller" type="Position2D" parent="."]
+position = Vector2( 100, 0 )

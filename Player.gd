@@ -3,13 +3,23 @@ extends KinematicBody2D
 var motion = Vector2(0, 200)
 var double_jump
 var hp = 3
-var speed = 200
+var speed = 175
 var moveabled = true
 
 func _ready():
 	fighting()
 
 func _physics_process(_delta):
+	if Input.is_action_pressed("1"):
+		$Controller.position.y = -100
+	elif Input.is_action_pressed("2"):
+		$Controller.position.y = 100
+	
+	if Input.is_action_pressed("3"):
+		$Controller.position.x = -100
+	elif Input.is_action_pressed("4"):
+		$Controller.position.x = 100
+	
 	if hp < 1:
 		moveabled = false
 	
@@ -23,9 +33,9 @@ func _physics_process(_delta):
 		motion.x += speed/10
 	
 	if Input.is_action_just_pressed("dashleft") and moveabled == true: #Elizabeth owes Clayton $5
-		motion.x = -speed * 4
+		motion.x = -speed * 3
 	elif Input.is_action_just_pressed("dashright") and moveabled == true:
-		motion.x = speed * 4
+		motion.x = speed * 3
 	
 	if Input.is_action_just_pressed("up") and is_on_wall() and moveabled == true:
 		double_jump = 1
@@ -47,19 +57,24 @@ func _physics_process(_delta):
 	$Bottom.speed_scale = 1 + (abs(motion.x) / 50)
 	
 	if motion.x > 0:
-		$Top.flip_h = false
-		$Top.offset.x = 0
 		$Bottom.flip_h = false
 		$Bottom.playing = true
 		$Bottom.animation = "Walk"
 	elif motion.x < 0:
-		$Top.flip_h = true
-		$Top.offset.x = -70
 		$Bottom.flip_h = true
 		$Bottom.playing = true
 		$Bottom.animation = "Walk"
 	else:
 		$Bottom.playing = false
+	
+	if position.x < get_global_mouse_position().x:
+		$Damage.cast_to.x = 50
+		$Top.flip_h = false
+		$Top.offset.x = 0
+	elif position.x > get_global_mouse_position().x:
+		$Damage.cast_to.x = -50
+		$Top.flip_h = true
+		$Top.offset.x = -70
 	
 	move_and_slide(motion)
 

@@ -30,7 +30,7 @@ func _physics_process(_delta):
 		motion.x += 10
 	
 	if desired.y < position.y and is_on_wall():
-		motion.y = -300
+		motion.y = -250
 	elif motion.y < 300:
 		motion.y += 12
 	elif is_on_wall():
