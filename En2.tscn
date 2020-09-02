@@ -6,29 +6,29 @@
 [sub_resource type="CapsuleShape2D" id=1]
 height = 5.75255
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=2]
 flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 1024, 1024 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 1024, 0, 1024, 1024 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=4]
 flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 1024, 1024, 1024 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=5]
 flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 1024, 1024, 1024, 1024 )
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
 "name": "walk",
 "speed": 5.0
@@ -51,9 +51,9 @@ collide_with_areas = true
 [node name="Mimic" type="AnimatedSprite" parent="."]
 position = Vector2( 0, 4.76837e-07 )
 scale = Vector2( 0.084833, 0.084833 )
-frames = SubResource( 2 )
+frames = SubResource( 6 )
 animation = "walk"
-frame = 3
+frame = 2
 playing = true
 offset = Vector2( -125, 75 )
 flip_h = true

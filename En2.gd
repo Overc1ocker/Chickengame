@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 var motion = Vector2(0, 200)
 var desired
+var movable = true
+var hp = 0
 
 func _ready():
 	attack()
@@ -18,18 +20,20 @@ func attack():
 
 func _physics_process(_delta):
 	
+	$Damage.enabled = movable
+	
 	desired = find_node_by_name(get_tree().get_root(), "Player").position
 	
-	if desired.x + 25 < position.x and motion.x > -100:
+	if desired.x + 25 < position.x and motion.x > -100 and movable == true:
 		motion.x -= 10
-	elif desired.x - 25 > position.x and motion.x < 100:
+	elif desired.x - 25 > position.x and motion.x < 100 and movable == true:
 		motion.x += 10
 	elif motion.x > 0:
 		motion.x -= 10
 	elif motion.x < 0:
 		motion.x += 10
 	
-	if desired.y < position.y and is_on_wall():
+	if desired.y < position.y and is_on_wall() and movable == true:
 		motion.y = -250
 	elif motion.y < 300:
 		motion.y += 12
@@ -47,6 +51,9 @@ func _physics_process(_delta):
 		$Mimic.flip_h = true
 	
 	move_and_slide(motion)
+	
+	if hp < 1:
+		movable = false
 
 func find_node_by_name(root, name):
 	if(root.get_name() == name): return root
